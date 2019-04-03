@@ -10,6 +10,8 @@ WORKDIR /my_app
 # install Python modules needed by the Python app
 COPY requirements.txt /my_app
 
+COPY envvars /my_app/
+
 RUN pwd
 
 RUN ls -la
