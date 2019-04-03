@@ -1,22 +1,28 @@
 # our base image
 FROM alpine:latest
 
-# Install python and pip
-RUN apk add --update py-pip
+USER root
 
-# upgrade pip
-RUN pip install --upgrade pip
+RUN mkdir /my_app
+
+WORKDIR /my_app
 
 # install Python modules needed by the Python app
-COPY requirements.txt /usr/src/app/
+COPY requirements.txt /my_app
+
+RUN pwd
+
+RUN ls -la
+
+RUN apt-get update
+
 RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
 
 # copy files required for the app to run
-COPY app.py /usr/src/app/
-COPY templates/index.html /usr/src/app/templates/
+COPY app.py /my_app
 
 # tell the port number the container should expose
 EXPOSE 5000
 
 # run the application
-CMD ["python", "/usr/src/app/app.py"]
+CMD ["python", "/my_app/app.py"]
