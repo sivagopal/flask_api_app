@@ -16,9 +16,7 @@ RUN ls -la
 
 RUN apt-get update
 
-RUn apt-get install -y python-pip
-
-RUN pip install --no-cache-dir -r /usr/src/app/requirements.txt
+RUN apt-get install -y python-pip
 
 # copy files required for the app to run
 COPY app.py /my_app
